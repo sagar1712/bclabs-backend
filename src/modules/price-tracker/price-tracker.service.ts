@@ -38,7 +38,7 @@ export class PriceTrackerService {
     });
   }
 
-  @Cron(CronExpression.EVERY_10_SECONDS)
+  @Cron(CronExpression.EVERY_5_MINUTES)
   async fetchAndStorePrices() {
     try {
       const ethPrice = await this.fetchPriceFromAPI(ChainEnum.Ethereum);
