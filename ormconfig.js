@@ -1,6 +1,6 @@
-const dotenv = require('dotenv')
-const { DataSource } = require('typeorm')
-dotenv.config()
+const dotenv = require('dotenv');
+const { DataSource } = require('typeorm');
+dotenv.config();
 
 const dataSource = new DataSource({
   type: 'postgres',
@@ -15,5 +15,6 @@ const dataSource = new DataSource({
   cli: {
     migrationsDir: 'src/migrations',
   },
-})
-exports.dataSource = dataSource
+  ssl: true,
+});
+exports.dataSource = dataSource;

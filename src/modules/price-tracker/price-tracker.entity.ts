@@ -1,29 +1,40 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm'
-import { PriceTrackerInterface } from './price-tracker.interface'
-import { CreatedModified } from 'src/helpers'
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { CreatedModified } from '../../helpers';
+import {
+  AlertsInterface,
+  ChainEnum,
+  PricesInterface,
+} from './price-tracker.interface';
 
 @Entity()
-export class PriceTracker extends CreatedModified implements PriceTrackerInterface {
+export class Prices extends CreatedModified implements PricesInterface {
   @PrimaryColumn()
-  id: string
+  id: string;
 
-  @Column({
-    transformer: {
-      to: (value: string) => value.toLowerCase(),
-      from: (value: string) => value,
-    },
-  })
-  nftContract: string
+  @Column()
+  chain: ChainEnum;
 
-  @Column({ nullable: true })
-  boughtAt: Date
+  @Column('decimal')
+  price: number;
 
-  @Column({ type: 'bigint' })
-  price: string
+  @CreateDateColumn()
+  timestamp!: Date;
+}
 
-  @Column({ nullable: true })
-  totalUnits: number
+@Entity()
+export class Alerts extends CreatedModified implements AlertsInterface {
+  @PrimaryColumn()
+  id: string;
 
-  @Column({ nullable: true })
-  fees: number
+  @Column()
+  chain: string;
+
+  @Column()
+  targetPrice: number;
+
+  @Column()
+  email: string;
+
+  @Column()
+  isTriggered: boolean;
 }

@@ -1,6 +1,6 @@
-import * as dotenv from 'dotenv'
-import { DataSource, DataSourceOptions } from 'typeorm'
-dotenv.config()
+import * as dotenv from 'dotenv';
+import { DataSource, DataSourceOptions } from 'typeorm';
+dotenv.config();
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   host: process.env.POSTGRES_HOST,
@@ -10,17 +10,18 @@ export const dataSourceOptions: DataSourceOptions = {
   port: parseInt(process.env.POSTGRES_PORT),
   synchronize: false,
   entities: ['dist/modules/**/*.entity.js'],
-}
+  ssl: true,
+};
 
 const initializeDataSource = async () => {
-  const dataSourceConn = new DataSource(dataSourceOptions)
+  const dataSourceConn = new DataSource(dataSourceOptions);
   try {
     // console.log('dataSourceOptions', dataSourceOptions)
-    await dataSourceConn.initialize()
-    return dataSourceConn
+    await dataSourceConn.initialize();
+    return dataSourceConn;
   } catch (err) {
-    console.error('Error during Data Source initialization', err)
+    console.error('Error during Data Source initialization', err);
   }
-}
+};
 
-export const dataSource = initializeDataSource()
+export const dataSource = initializeDataSource();
