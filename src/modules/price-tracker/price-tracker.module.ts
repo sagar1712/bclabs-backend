@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common'
 import { PriceTrackerService } from './price-tracker.service';
 import { PriceTrackerController } from './price-tracker.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PriceTracker } from './price-tracker.entity';
+import { Alerts, Prices } from './price-tracker.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([PriceTracker])],
+  imports: [TypeOrmModule.forFeature([Prices, Alerts])],
   controllers: [PriceTrackerController],
   providers: [PriceTrackerService],
   exports: [PriceTrackerService],
