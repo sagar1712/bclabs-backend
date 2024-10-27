@@ -1,0 +1,10 @@
+services:
+  price_tracker:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./src:/usr/src/app/src
+    command: npm run start:prod
+    environment:
+      - PORT=3000
